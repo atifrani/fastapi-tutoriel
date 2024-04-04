@@ -1,6 +1,6 @@
 # import du package fastapi
 from fastapi import FastAPI, HTTPException
-from models import User, Gender, Role
+from models import User, Gender, Role, update_user
 from uuid import uuid4, UUID
 from typing import List
 
@@ -23,6 +23,15 @@ db: List[User] = [
         id = uuid4(),
         first_name = "Toto",
         last_name = "titi",
+        gender = Gender.male,
+        roles=[Role.admin, Role.user]
+    ),
+
+    User(
+
+        id = uuid4(),
+        first_name = "",
+        last_name = "",
         gender = Gender.male,
         roles=[Role.admin, Role.user]
     )
@@ -75,3 +84,17 @@ def remove_user(id: UUID):
     )
 
 # Creation d'une methode pour mettre a jour un user
+@app.put("/api/v1/user/{id}")
+def update_user(id:UUID, user_update: update_user):
+    for user in db:
+        if user.id == id:
+            if len(user_update.first_name) > 0:
+                user.first_name = user_update.first_name
+            else:  
+                return {"Message" :"Fist_name cannot be empty"}
+
+            if len(user_update.last_name) > 0 :
+                user.last_name = user_update.last_name
+            else:  
+                return {"Message" :"Last_name cannot be empty"}
+    return user

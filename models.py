@@ -20,3 +20,7 @@ class User(BaseModel):
     last_name : str
     gender : Gender
     roles : List[Role]
+
+class update_user(BaseModel):
+    first_name : str
+    last_name : str
