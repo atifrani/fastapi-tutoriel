@@ -45,6 +45,7 @@ def get_users():
     return db
 
 # Creation d'une methode post new user
-@app.get("/api/v1/user")
-def get_users():
-    return db
+@app.post("/api/v1/user")
+def add_users(user:User):
+    db.append(user)
+    return 'User succesfully added'
