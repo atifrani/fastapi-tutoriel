@@ -43,3 +43,8 @@ def home():
 @app.get("/api/v1/users")
 def get_users():
     return db
+
+# Creation d'une methode post new user
+@app.get("/api/v1/user")
+def get_users():
+    return db
