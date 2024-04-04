@@ -39,7 +39,7 @@ def root():
 def home():
     return {"Salutation" : "Bonjour à tous"}
 
-# Creation d'une methode get users
+# Creation d'une methode get all users
 @app.get("/api/v1/users")
 def get_users():
     return db
