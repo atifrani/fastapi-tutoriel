@@ -61,3 +61,17 @@ def get_user(id:UUID):
         status_code= 404,
         detail= f"Error 404. User with id {id}, not found."
         )
+
+# Creation d'un methode pour supprimer un user
+@app.delete("/api/v1/user/{id}")
+def remove_user(id: UUID):
+    for user in db: 
+        if user.id == id:
+            db.remove(user)
+            return db
+    raise HTTPException(
+        status_code= 404,
+        detail= f"Error 404 can not delte the user with id {id}, not found."
+    )
+
+# Creation d'une methode pour mettre a jour un user
